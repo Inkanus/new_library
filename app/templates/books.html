@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+  <h1>View your books</h1>
+  <h3>or <a href="{{ url_for('routes.edit_book') }}">add</a> a new one.</h3>
+  <br>
+  <div class="form-group">
+    <form action="/books">
+      <div class="row justify-content-start"">
+        <div class="col-2">
+          <select class="form-control" name="sort_key">
+            <option value="title" {% if args['sort_key'] == 'title' %}selected{% endif %}>title</option>
+            <option value="year" {% if args['sort_key'] == 'year' %}selected{% endif %}>year</option>
+            <option value="pages" {% if args['sort_key'] == 'pages' %}selected{% endif %}>pages</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <select class="form-control" name="sort_order">
+            <option value="asc" {% if args['sort_order'] == 'asc' %}selected{% endif %}>ascending</option>
+            <option value="desc" {% if args['sort_order'] == 'desc' %}selected{% endif %}>descending</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-outline-primary" type="submit">Sort</button>
+        </div>
+    </form>
+  </div>
+  <div>
+  <br>
+  <ul class="list-unstyled">
+    {% if books %}
+      {% for book in books %}
+        <li>
+          <a href="{{ url_for('routes.books', id=book.id) }}">
+            <h4 class="display-5">{{ book.title }}</h4>
+          </a>
+          <footer class="blockquote-footer"><cite>
+            {% for author in book.authors %}{{ author }}, {% endfor %}{{ book.year }}
+          </cite></footer>
+        </li>
+        <br>
+      {% endfor %}
+    {% else %}
+      <li>There are no books yet.</li>
+    {% endif %}
+  </ul>
+  </div>
+
+{% endblock content %}

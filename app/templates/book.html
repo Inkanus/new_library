@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1>{{ book.title }}</h1>
+    <h4 class="lead">{% for author in book.authors %}{{ author }}, {% endfor %}{{ book.year }}</h4>
+    <ul class="list-inline">
+      {% if book.genres %}
+        {% for genre in book.genres %}
+          {% if genre %}
+            <li class="list-inline-item">{{ genre }}</li>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <li class="list-inline-item">{{ book.pages }} pages</li>
+      <li class="list-inline-item">
+        <a href="{{ url_for('routes.edit_book', id=book.id) }}">Edit</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="{{ url_for('routes.delete_book', id=book.id) }}">Delete</a>
+      </li>
+    </ul>
+    <ul class="list-inline">
+      {% if rent_data %}
+        <li class="list-inline-item">Last rent at {{ rent_data }}</li>
+        <li class="list-inline-item">
+          <a href="{{ url_for('routes.return_book', id=book.id) }}">Return</a>
+        </li>
+      {% else %}
+      <li class="list-inline-item">
+        <a href="{{ url_for('routes.rent_book', id=book.id) }}">Rent</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+  <hr>
+  <p>
+    {% if book.description %}
+      {{ book.description }}
+    {% else %}
+      There is no description.
+    {% endif %}
+  </p>
+
+{% endblock content %}

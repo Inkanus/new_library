@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <p>
+    <form class="form" action="/edit_book/{{ book.id }}", method="POST", role="form">
+      {{ form.csrf_token }}
+      <div class="form-group">
+        <label for="title"><b>Title</b></label>
+        <input type="text" class="form-control" name="title" placeholder="Title"
+          value="{{ form.title.data if form.title.data else '' }}"><br>
+        <label for="author"><b>Author</b></label>
+        <div class="row">
+          {% for author in form.authors %}
+          <div class="col-sm">
+            <input type="text" class="form-control" name="authors-{{ loop.index0 }}"
+              placeholder="Author {{ loop.index0 + 1}}" value="{{ author.data if author.data else '' }}"><br>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <label for="year"><b>Year of publication</b></label>
+            <input type="text" class="form-control" name="year"
+              placeholder="Year", value="{{ form.year.data if form.year.data else '' }}">
+            <footer class="mb-0" style="color: red;">{{ error.year[0] if error and 'year' in error else '' }}</footer>
+          </div>
+          <div class="col-sm">
+            <label for="pages"><b>Number of pages</b></label>
+            <input type="text" class="form-control" name="pages"
+              placeholder="Pages", value="{{ form.pages.data if form.pages.data else '' }}">
+              <footer class="mb-0" style="color: red;">{{ error.pages[0] if error and 'pages' in error else '' }}</footer>
+          </div>
+        </div>
+        <br>
+        <label for="genres"><b>Genres</b></label>
+        <div class="row">
+          {% for genre in form.genres %}
+          <div class="col-sm">
+            <input type="text" class="form-control" name="genres-{{ loop.index0 }}"
+              placeholder="Genre {{ loop.index0 + 1}}" value="{{ genre.data if genre.data else '' }}"><br>
+          </div>
+          {% endfor %}
+        </div>
+        <label for="description"><b>Summary</b></label>
+        <textarea type="text" class="form-control" name="description" placeholder="Summary" 
+          rows=4>{{ form.description.data if form.description.data else '' }}</textarea>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Save">
+      </div>
+    </form>
+  </p>
+
+{% endblock content %}

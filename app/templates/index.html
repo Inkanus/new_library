@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1>Save your favorite books.</h1>
+    <h2 class="lead">Home Library lets you create
+      your personal collection of books.</h2> 
+  </div>
+  <hr>
+  <div>
+    <p>
+      To start <a href="{{ url_for('routes.edit_book') }}">add</a> your first book to your library,
+      otherwise <a href="{{ url_for('routes.books') }}">take</a> a look at your collection.
+    </p>
+  </div>
+{% endblock content %}
