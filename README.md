@@ -4,7 +4,7 @@ Home Library is a flask-based website that lets you save your favorite books.
 
 ## Prerequisites
 
-* Python 3.9+
+* Python 3.8+
 
 ## Installation
 
