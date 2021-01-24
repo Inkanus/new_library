@@ -4,7 +4,7 @@ Home Library is a flask-based website that lets you save your favorite books.
 
 ## Prerequisites
 
-* Python 3.8+
+* Python 3.9+
 
 ## Installation
 
@@ -21,8 +21,7 @@ pip install -r requirements.txt
 
 Run the server
 ```
-set FLASK_APP=home_library.py
-python -m flask run
+python home_library.py
 ```
 Visit http://localhost:5000 using your browser, from there start adding books
 using the dedicated form or view them in the My Books section, sorting as you prefer.
@@ -69,10 +68,7 @@ import requests
 # "genres" and "description" are optional and can be not specified
 data = {
     "title": "Eragon",
-    "author": [
-        "Christopher Paolini",  # specify up to three genres, leave empty strings
-        "", ""
-    ]
+    "author": "Christopher Paolini",
     "year": 2002, 
     "genres": [
         "fantasy", "dystopian", "" # specify up to three genres, leave empty strings
@@ -107,7 +103,7 @@ import requests
 
 book_id = 0
 data = {
-    "author": ["Christopher Paolini", "", ""],
+    "author": "Christopher Paolini",
     "year": 2002}
 requests.put(
     "http://localhost:5000/api/v1/books/%d" % book_id,

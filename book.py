@@ -1,5 +1,6 @@
 import json
 
+
 class Book:
     DEFAULTS = {
         "title": "",
@@ -9,7 +10,9 @@ class Book:
         "pages": 0,
         "description": ""
     }
-    def __init__(self, id, title, author, year, genres, pages, description):
+
+
+def __init__(self, id, title, author, year, genres, pages, description):
         self.id = id
         self.title = title
         self.author = author
